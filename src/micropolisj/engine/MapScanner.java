@@ -217,6 +217,20 @@ class MapScanner extends TileBehavior
 		if ((city.cityTime % 8) == 0) {
 			repairZone(NEW_BUILDING, 3);
 		}
+		int z;
+		if (powerOn) {  //implemented effect of police station
+			z = city.policeEffect;
+		} else {
+			z = city.policeEffect / 1.5;
+		}
+
+		traffic.mapX = xpos;
+		traffic.mapY = ypos;
+		if (!traffic.findPerimeterRoad()) {
+			z /= 2;
+		}
+
+		city.policeMap[ypos/8][xpos/8] += z;
 	}
 
 	void doFireStation()
